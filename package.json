@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts nodemon",
+    "generate:types": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts payload generate:types",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -29,6 +30,7 @@
     "express": "^4.19.2",
     "lucide-react": "^0.416.0",
     "next": "14.2.5",
+    "nodemailer": "^6.9.14",
     "payload": "^2.25.0",
     "react": "^18",
     "react-dom": "^18",
