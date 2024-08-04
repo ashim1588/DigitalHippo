@@ -2,8 +2,7 @@ import { AuthCredentialsValidator } from '../lib/validators/account-credentials-
 import { publicProcedure, router } from './trpc'
 import { getPayloadClient } from '../get-payload'
 import { TRPCError } from '@trpc/server'
-import { date, z } from 'zod'
-import payload from 'payload'
+import {  z } from 'zod'
 
 export const authRouter = router({
   createPayloadUser: publicProcedure
@@ -55,7 +54,9 @@ export const authRouter = router({
       return {success: true}
     }),
 
-    signIn: publicProcedure.input(AuthCredentialsValidator).mutation(async ({input, ctx}) => {
+    signIn: publicProcedure
+    .input(AuthCredentialsValidator)
+    .mutation(async ({input, ctx}) => {
       const { email, password } = input
       const { res } = ctx 
 
@@ -63,7 +64,7 @@ export const authRouter = router({
 
       try {
         await payload.login({
-          collections: "users",
+          collection: "users",
           data: {
             email,
             password,
@@ -77,3 +78,6 @@ export const authRouter = router({
       }
     })
 })
+
+
+

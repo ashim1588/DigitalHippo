@@ -23,11 +23,19 @@ const Page = () => {
     const isSeller = searchParams.get('as') === 'seller';
     const origin = searchParams.get('origin');
 
+    const continueAsSeller= () => {
+        router.push("?as=seller");
+    }
+
+    const continueAsBuyer = () => {
+        router.replace('/sign-in', undefined);
+    }
+
     const { register, handleSubmit, formState: {errors} } = useForm<TAuthCredentialsValidator>({
         resolver: zodResolver(AuthCredentialsValidator),
     });
 
-   const {mutate, isLoading} = trpc.auth.signIn.useMutation({
+   const {mutate: signIn, isLoading} = trpc.auth.signIn.useMutation({
     onSuccess: () => {
         toast.success('You have successfully signed in');
         router.refresh();
@@ -42,11 +50,16 @@ const Page = () => {
         }
 
         router.push('/');
+    },
+    onError: (err) => {
+        if(err.data?.code === "UNAUTHORIZED") {
+            toast.error('Invalid email or password');
+        }
     }
    });
 
     const onSubmit = ({email, password}:  TAuthCredentialsValidator) => {
-        mutate({email, password});
+        signIn({email, password});
     }
 
   return (
@@ -63,7 +76,8 @@ const Page = () => {
             <div className='flex flex-col items-center space-y-2 text-center'>
                 <Icons.logo className='h-20 w-20' />
                 <h1 className='text-2xl font-bold'>
-                    Sign in to your account
+                    Sign in to your {isSeller ? 'seller' : ''}{' '}
+                    account
                 </h1>
 
                 <Link 
@@ -122,8 +136,22 @@ const Page = () => {
                             or
                         </span>
                     </div>
-
                 </div>
+                {isSeller 
+                ? (
+                    <Button 
+                      onClick={continueAsBuyer} 
+                      variant='secondary' 
+                      disabled={isLoading}>
+                        Continue as customer
+                    </Button>
+                ) 
+                :  <Button 
+                     onClick={continueAsSeller}
+                     variant='secondary' 
+                     disabled={isLoading}>
+                    Continue as seller
+                   </Button>}
             </div>
         </div>
     </div>
