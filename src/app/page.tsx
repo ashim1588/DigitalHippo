@@ -60,7 +60,7 @@ export default function Home() {
         </div>
       </div>
 
-      <ProductReel title='Brand new' subtitle="Here are some brand new products" href="/products"/>
+      <ProductReel query={{sort: "desc", limit: 4}} title='Brand new' subtitle="Here are some brand new products" href="/products"/>
       {/* TO DO: List Products */}
     </MaxWidthWrapper>
     <section 
