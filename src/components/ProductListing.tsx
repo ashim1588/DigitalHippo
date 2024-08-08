@@ -3,6 +3,8 @@
 import { Product } from '../payload-types';
 import React, { useState } from 'react'
 import { Skeleton } from './ui/skeleton';
+import Link from 'next/link';
+import { cn } from '@/lib/utils';
 
 interface ProductListingProps {
     product: Product | null,
@@ -13,6 +15,16 @@ const ProductListing = ({product, index}: ProductListingProps) => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
 
   if(!product || !isVisible) return <ProductPlaceHolder />
+
+  if(isVisible && product) {
+    return (
+        <Link
+        className={cn('invisible h-full w-full cursor-pointer group/main', {
+            "visible animate-in fade-in-5": isVisible,
+        })}
+        href={`/products/${product.id}`}></Link>
+    )
+  }
   
     return (
     <div>ProductListing</div>
