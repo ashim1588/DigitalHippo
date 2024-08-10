@@ -1,9 +1,11 @@
 "use client";
 import React, { useEffect, useState } from 'react'
 import { Button } from './ui/button';
-import { clear } from 'console';
+import { useCart } from '@/hooks/use-cart';
+import { Product } from '@/payload-types';
 
-const AddToCartButton = () => {
+const AddToCartButton = ({product}: {product: Product}) => {
+    const {addItem} = useCart();
     const [isSucess, setIsSuccess] = useState<boolean>(false);
     useEffect(() => {
         const timeout = setTimeout(() => {
@@ -13,7 +15,12 @@ const AddToCartButton = () => {
         return () => clearTimeout(timeout);
     },[isSucess])
   return (
-    <Button onClick={() => setIsSuccess(true)} size='lg' className='w-full'>
+    <Button 
+    onClick={() => 
+    {
+        addItem(product)
+        setIsSuccess(true)
+    }} size='lg' className='w-full'>
         {isSucess ? 'Added!' : 'Add to cart'}
     </Button>
   )
