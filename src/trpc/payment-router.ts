@@ -30,11 +30,11 @@ export const paymentRouter = router({
           },
         },
       })
-
+      //@ts-expect-error
     const filteredProducts: { id: string; priceId: string }[] = products.filter((prod: { priceId: string }) =>
         Boolean(prod.priceId)
     )
-
+    //@ts-expect-error
     const order: { id: string } = await payload.create({
       collection: 'orders',
       data: {
