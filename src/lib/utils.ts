@@ -59,7 +59,7 @@ export function constructMetadata({
       creator: '@ashimmehar',
     },
     icons,
-    //metadataBase: new URL("digitalhippo-production-b507.up.railway.app"),
+    metadataBase: new URL("http://localhost:3000"),
     ...(noIndex && {
       robots: {
         index: false,
