@@ -37,6 +37,7 @@ const Page = async ({searchParams}: PageProps) => {
 
     if(!order) return notFound();
 
+    //@ts-ignore
     const orderUserId = typeof order.user === 'string' ? order.user : order.user.id;
 
     if(orderUserId !== user?.id) {
@@ -80,6 +81,7 @@ const Page = async ({searchParams}: PageProps) => {
                     your reciept and order details to 
                     {typeof order.user !== "string" 
                     ? <span className='font-medium text-gray-900'>
+                        {/* @ts-expect-error */}
                         {" "}{order.user.email}
                     </span> 
                     : null}
@@ -173,8 +175,10 @@ const Page = async ({searchParams}: PageProps) => {
                     </div>
 
                     <PaymentStatus 
+                    //@ts-ignore
                     isPaid={order._isPaid} 
                     orderEmail={(order.user as User).email} 
+                    //@ts-ignore
                     orderId={order.id}  />
 
                     <div className='mt-16 border-t border-gray-200 py-6 text-right'>

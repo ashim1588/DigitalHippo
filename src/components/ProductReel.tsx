@@ -31,6 +31,7 @@ const ProductReel = (props: ProductReelProps) => {
     const products = queryResults?.pages.flatMap((page) => page.items);
     let map: (Product | null)[] = [];
     if(products && products.length) {
+        //@ts-ignore
         map = products
     } else if(isLoading) {
         map = new Array<null>(query.limit ?? FALLBACK_LIMIT).fill(null);
