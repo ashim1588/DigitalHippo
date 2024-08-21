@@ -50,6 +50,7 @@
     "react-hook-form": "^7.52.1",
     "resend": "^3.5.0",
     "sonner": "^1.5.0",
+    "string-width": "^7.2.0",
     "stripe": "^16.7.0",
     "swiper": "^11.1.9",
     "tailwind-merge": "^2.4.0",
