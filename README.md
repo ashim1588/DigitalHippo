@@ -64,9 +64,9 @@ To run Digital Hippo on your local machine, follow these steps:
 
 ### Prerequisites
 
-- Node.js installed
+- Node.js Installed
 - MongoDB Setup
-- Stripe account and API keys
+- Stripe Account and API keys
 - Resend API Key
 
 ### Installation
